@@ -1,3 +1,5 @@
+use std::error::Error;
+
 use axum::{serve::Serve, Router};
 use tower_http::services::ServeDir;
 
