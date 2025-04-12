@@ -19,7 +19,7 @@ impl TestApp {
         let _ = tokio::spawn(app.run());
 
         let http_client = reqwest::Client::builder()
-            .timeout(std::time::Duration::from_secs(10))
+            .user_agent("test reqwest")
             .build()
             .expect("Failed to build HTTP client");
 
@@ -38,47 +38,44 @@ impl TestApp {
             .expect("Failed to execute request.")
     }
 
-
-    pub async fn get_signup(&self) -> reqwest::Response {
+    pub async fn post_signup(&self) -> reqwest::Response {
         self.http_client
-            .get(&format!("{}/signup", &self.address))
+            .post(&format!("{}/signup", &self.address))
             .send()
             .await
             .expect("Failed to execute request.")
     }
 
-
-    pub async fn get_login(&self) -> reqwest::Response {
+    pub async fn post_login(&self) -> reqwest::Response {
         self.http_client
-            .get(&format!("{}/login", &self.address))
+            .post(&format!("{}/login", &self.address))
             .send()
             .await
             .expect("Failed to execute request.")
     }
 
-    pub async fn get_logout(&self) -> reqwest::Response {
+    pub async fn post_logout(&self) -> reqwest::Response {
         self.http_client
-            .get(&format!("{}/logout", &self.address))
+            .post(&format!("{}/logout", &self.address))
             .send()
             .await
             .expect("Failed to execute request.")
     }
 
-    pub async fn get_verify_2fa(&self) -> reqwest::Response {
+    pub async fn post_verify_2fa(&self) -> reqwest::Response {
         self.http_client
-            .get(&format!("{}/verify-2fa", &self.address))
+            .post(&format!("{}/verify-2fa", &self.address))
             .send()
             .await
             .expect("Failed to execute request.")
     }
 
-    pub async fn get_verify_token(&self) -> reqwest::Response {
+    pub async fn post_verify_token(&self) -> reqwest::Response {
         self.http_client
-            .get(&format!("{}/verify-token", &self.address))
+            .post(&format!("{}/verify-token", &self.address))
             .send()
             .await
             .expect("Failed to execute request.")
     }
 
-    // TODO: Implement helper functions for all other routes (signup, login, logout, verify-2fa, and verify-token)
 }

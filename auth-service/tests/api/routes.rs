@@ -2,7 +2,7 @@ use crate::helpers::TestApp;
 
 // Tokio's test macro is used to run the test in an async environment
 #[tokio::test]
-async fn root_returns_auth_ui() {
+async fn auth_ui_returns() {
     let app = TestApp::new().await;
 
     let response = app.get_root().await;
@@ -12,53 +12,48 @@ async fn root_returns_auth_ui() {
 }
 
 #[tokio::test]
-async fn root_returns_signup() {
+async fn signup_returns() {
     let app = TestApp::new().await;
 
-    let response = app.get_signup().await;
+    let response = app.post_signup().await;
 
     assert_eq!(response.status().as_u16(), 200);
-    assert_eq!(response.headers().get("content-type").unwrap(), "text/html");
 }
 
 #[tokio::test]
-async fn root_returns_login() {
+async fn login_returns() {
     let app = TestApp::new().await;
 
-    let response = app.get_login().await;
+    let response = app.post_login().await;
 
     assert_eq!(response.status().as_u16(), 200);
-    assert_eq!(response.headers().get("content-type").unwrap(), "text/html");
 }
 
 #[tokio::test]
-async fn root_returns_logout() {
+async fn logout_returns() {
     let app = TestApp::new().await;
 
-    let response = app.get_logout().await;
+    let response = app.post_logout().await;
 
     assert_eq!(response.status().as_u16(), 200);
-    assert_eq!(response.headers().get("content-type").unwrap(), "text/html");
 }
 
 #[tokio::test]
-async fn root_returns_verify_2fa() {
+async fn verify_2fa_returns() {
     let app = TestApp::new().await;
 
-    let response = app.get_verify_2fa().await;
+    let response = app.post_verify_2fa().await;
 
     assert_eq!(response.status().as_u16(), 200);
-    assert_eq!(response.headers().get("content-type").unwrap(), "text/html");
 }
 
 #[tokio::test]
-async fn root_returns_verify_token() {
+async fn verify_token_returns() {
     let app = TestApp::new().await;
 
-    let response = app.get_verify_token().await;
+    let response = app.post_verify_token().await;
 
     assert_eq!(response.status().as_u16(), 200);
-    assert_eq!(response.headers().get("content-type").unwrap(), "text/html");
 }
 
 // TODO: Implement tests for all other routes (signup, login, logout, verify-2fa, and verify-token)
